@@ -1,0 +1,46 @@
+$namespace: 'm'; //前缀名
+$element-separator: '__'; //子元素连接符
+$modifier-separator: '--'; //块样式状态连接符
+$state-prefix: 'is-'; //状态前缀
+
+/* BEM support Func
+ -------------------------- */
+@function selectorToString($selector) {
+  $selector: inspect($selector);
+  $selector: str-slice($selector, 2, -2);
+  @return $selector;
+}
+
+//判断父级选择器是否包含'--'
+@function containsModifier($selector) {
+  $selector: selectorToString($selector);
+  @if str-index($selector, $modifier-separator) {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+//看看当前选择器是否存在$state-prefix这个变量也就是"is-";
+@function containWhenFlag($selector) {
+  $selector: selectorToString($selector);
+  @if str-index($selector, '.' + $state-prefix) {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+//看看当前选择器是否存在"：";用于判断伪类和伪元素
+@function containPseudoClass($selector) {
+  $selector: selectorToString($selector);
+
+  @if str-index($selector, ':') {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+
+@function hitAllSpecialNestRule($selector) {
+  @return containsModifier($selector) or containWhenFlag($selector) or
+    containPseudoClass($selector);
+}
