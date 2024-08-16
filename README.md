@@ -145,3 +145,6 @@ function changeGlobalState() {
 (2) script默认提供lint:fix和prettier:fix命令帮助快速修复代码格式化及简单的lint规范问题
 
 (3) commit -m "msg" msg书写格式为"feat: xxx", 仅支持feat,update,fix,refactor,optimize,style,docs,chore描述类型
+
+
+## 子工程模版地址 https://github.com/SplitterChan/micro-v3-vite-sub-template
